@@ -17,7 +17,6 @@ export interface Itinerary {
   [key: string]: any;
 }
 
-/** POST /generate-itinerary */
 export async function generateItinerary(
   payload: GenerateItineraryPayload
 ): Promise<Itinerary> {
@@ -39,7 +38,6 @@ export async function generateItinerary(
   return res.json();
 }
 
-/** GET /test — health check */
 export async function pingBackend(): Promise<{ message: string }> {
   const res = await fetch(`${API_BASE}/test`);
   if (!res.ok) throw new Error('Backend not responding');
