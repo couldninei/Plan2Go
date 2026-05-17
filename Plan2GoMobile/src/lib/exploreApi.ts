@@ -51,7 +51,6 @@ export async function getExploreItems(
   return res.json();
 }
 
-/** Fetch the available filter options (city list, type list). */
 export async function getExploreFilters(): Promise<FiltersResponse> {
   const res = await fetch(`${API_BASE}/explore/filters`);
   if (!res.ok) throw new Error('Failed to load filter options');
