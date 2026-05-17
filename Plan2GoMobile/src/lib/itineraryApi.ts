@@ -1,4 +1,3 @@
-// src/lib/itineraryApi.ts
 import { API_BASE } from './baseUrl';
 
 export interface GenerateItineraryPayload {
