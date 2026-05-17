@@ -1,10 +1,3 @@
-// src/lib/session.tsx
-//
-// React context that mirrors `auth.ts` into React state. Without this, the
-// root layout would only check the user once at mount and never react to
-// sign-in / sign-out — so we hold the user in state here and re-render the
-// layout (and its Stack.Protected guards) when it changes.
-
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import * as authLib from './auth';
 
@@ -21,7 +14,6 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<authLib.User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Restore session on app launch
   useEffect(() => {
     authLib
       .getCurrentUser()
