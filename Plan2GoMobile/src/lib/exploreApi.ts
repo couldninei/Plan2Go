@@ -1,4 +1,3 @@
-// src/lib/exploreApi.ts
 import { API_BASE } from './baseUrl';
 
 export interface ExploreFilters {
@@ -31,12 +30,10 @@ export interface FiltersResponse {
   cities: string[];
 }
 
-/** Fetch explore items, optionally filtered. */
 export async function getExploreItems(
   filters: ExploreFilters = {}
 ): Promise<ExploreResponse> {
-  // React Native fetch doesn't accept URL objects in all engines — build a
-  // query string manually for safety.
+
   const params: string[] = [];
   if (filters.type && filters.type !== 'all') {
     params.push(`type=${encodeURIComponent(filters.type)}`);
