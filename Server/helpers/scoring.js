@@ -1,5 +1,5 @@
-const RATING_WEIGHT = 0.7;       // 70% of score comes from rating
-const AFFORDABILITY_WEIGHT = 0.3; // 30% comes from how cheap the item is
+const RATING_WEIGHT = 0.7; 
+const AFFORDABILITY_WEIGHT = 0.3; 
 
 function scoreItem(item, priceField, maxPrice) {
   const rating = item.rating || 0;
@@ -20,7 +20,6 @@ function rankItems(items, priceField) {
 function pickFromTop(rankedItems, count) {
   if (rankedItems.length === 0 || count <= 0) return [];
 
-  // Pool is the top half of the list (or top 2× the count, whichever is bigger)
   const poolSize = Math.max(count * 2, Math.ceil(rankedItems.length / 2));
   const pool = rankedItems.slice(0, poolSize);
 
