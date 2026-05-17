@@ -1,17 +1,4 @@
-// src/lib/storage.ts
-//
-// React Native port of the web `storage.js`. localStorage is synchronous;
-// AsyncStorage is asynchronous, so every helper is async and callers must
-// `await` it (or chain `.then()`).
-//
-// Public API is otherwise the same — trips, bookmarks (folder-based), and
-// profile preferences.
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-// =========================================================
-// Types
-// =========================================================
 
 export type TripStatus = 'unfinished' | 'planned' | 'past';
 
@@ -44,10 +31,6 @@ export interface Profile {
   notifications: boolean;
 }
 
-// =========================================================
-// Constants
-// =========================================================
-
 const TRIPS_KEY = 'plan2go.trips';
 const BOOKMARKS_KEY = 'plan2go.bookmarks';
 const PROFILE_KEY = 'plan2go.profile';
@@ -61,10 +44,6 @@ const DEFAULT_PROFILE: Profile = {
   language: 'English',
   notifications: true,
 };
-
-// =========================================================
-// TRIPS
-// =========================================================
 
 export async function getTrips(): Promise<Trip[]> {
   try {
@@ -113,10 +92,6 @@ export async function deleteTrip(id: string): Promise<void> {
   await AsyncStorage.setItem(TRIPS_KEY, JSON.stringify(filtered));
 }
 
-// =========================================================
-// BOOKMARKS (folder-based)
-// =========================================================
-
 function makeDefaultBookmarks(): Bookmarks {
   return Object.fromEntries(DEFAULT_FOLDERS.map((f) => [f, []]));
 }
@@ -139,7 +114,6 @@ async function saveBookmarks(bookmarks: Bookmarks): Promise<void> {
   await AsyncStorage.setItem(BOOKMARKS_KEY, JSON.stringify(bookmarks));
 }
 
-/** Add an item to a folder. Skips duplicates within that folder. */
 export async function addBookmark(
   folder: string,
   item: BookmarkItem
@@ -194,11 +168,6 @@ export async function getAllBookmarkedIds(): Promise<string[]> {
   return Array.from(ids);
 }
 
-/**
- * Toggle an item's bookmark status. If it's bookmarked anywhere, remove from
- * every folder. Otherwise add to the default folder.
- * Returns the new state: true = now bookmarked, false = now removed.
- */
 export async function toggleBookmarkItem(item: BookmarkItem): Promise<boolean> {
   const key = item.id ?? item.name;
   if (!key) return false;
@@ -236,10 +205,6 @@ export async function renameFolder(
   delete bookmarks[oldName];
   await saveBookmarks(bookmarks);
 }
-
-// =========================================================
-// PROFILE
-// =========================================================
 
 export async function getProfile(): Promise<Profile> {
   try {
