@@ -1,9 +1,3 @@
-// src/app/_layout.tsx
-//
-// Root layout. Renders the SessionProvider, then a Stack with two protected
-// branches: the (nav) group when signed in, the login screen when not.
-// Stack.Protected automatically redirects the user when the guard flips —
-// no manual router.push() needed.
 import { SessionProvider, useSession } from '@/lib/session';
 import { Stack } from 'expo-router';
 import { ActivityIndicator, View } from 'react-native';
@@ -31,7 +25,7 @@ function RootNavigator() {
       </Stack.Protected>
     </Stack>
   );
-}  {/* ← this closing brace was missing */}
+}
 
 export default function RootLayout() {
   return (
